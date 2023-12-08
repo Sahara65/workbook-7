@@ -45,27 +45,27 @@ FROM
 
 -- Question 4:
 SELECT 
-	ProductName, 
+    ProductName, 
     CategoryName, 
     UnitPrice AS MostExpensiveProducts 
 FROM 
-	(SELECT
-		p.ProductName, 
-		c.CategoryName, 
-		p.UnitPrice, 
-		RANK() OVER (PARTITION BY p.CategoryID ORDER BY p.UnitPrice DESC) AS PriceRank
+    (SELECT
+	p.ProductName, 
+	c.CategoryName, 
+	p.UnitPrice, 
+	RANK() OVER (PARTITION BY p.CategoryID ORDER BY p.UnitPrice DESC) AS PriceRank
 	FROM 
-		products AS p 
+	    products AS p 
 	JOIN 
-		categories AS c ON p.CategoryID = c.CategoryID
+	    categories AS c ON p.CategoryID = c.CategoryID
 	) ranked_products 
 WHERE 
-	PriceRank = 1;
+    PriceRank = 1;
 
 
 -- Question 5:
 SELECT 
-	o.OrderID,
+    o.OrderID,
     o.ShipName,
     o.ShipAddress,
     s.CompanyName,
@@ -80,7 +80,10 @@ WHERE
 
 -- Question 6:
 SELECT 
-    od.OrderID, o.OrderDate, p.ProductName, o.ShipAddress
+    od.OrderID, 
+    o.OrderDate, 
+    p.ProductName, 
+    o.ShipAddress
 FROM
     `order details` AS od
         JOIN
